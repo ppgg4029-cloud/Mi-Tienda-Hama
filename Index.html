@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hama Studio | Figuras de Hama Beads</title>
+<meta name="description" content="Figuras de Hama Beads hechas a mano. Llaveros, personajes y sets personalizados.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;
+    --bg-soft:#f7f7f7;
+    --ink:#111111;
+    --ink-soft:#4a4a4a;
+    --muted:#8a8a8a;
+    --line:#e5e5e5;
+    --card:#ffffff;
+    --radius:18px;
+    --radius-lg:28px;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.04);
+    --shadow-md:0 4px 12px rgba(0,0,0,.06), 0 20px 40px -20px rgba(0,0,0,.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink);
+    line-height:1.6; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif; letter-spacing:-.02em; line-height:1.1}
+  a{color:inherit; text-decoration:none}
+  img{max-width:100%; display:block}
+  button{font-family:inherit}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px}
+
+  /* HEADER */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,.8);
+    backdrop-filter:blur(20px) saturate(180%);
+    -webkit-backdrop-filter:blur(20px) saturate(180%);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0}
+  .logo{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.15rem;
+    display:flex; align-items:center; gap:10px; letter-spacing:-.02em;
+  }
+  .logo-icon{ width:26px; height:26px; display:grid; place-items:center; color:var(--ink); }
+  .nav-links{display:flex; gap:28px; font-size:.9rem; font-weight:500}
+  .nav-links a{color:var(--ink-soft); transition:color .2s;}
+  .nav-links a:hover{color:var(--ink)}
+  .cart-btn{
+    position:relative; border:1px solid var(--line); cursor:pointer;
+    background:#fff; color:var(--ink);
+    padding:10px 18px; border-radius:999px; font-weight:600; font-size:.88rem;
+    display:flex; align-items:center; gap:8px;
+  }
+  .badge{
+    background:var(--ink); color:#fff; font-size:.7rem;
+    min-width:20px; height:20px; border-radius:999px;
+    display:grid; place-items:center; padding:0 6px; font-weight:700;
+  }
+
+  /* HERO */
+  .hero{padding:80px 0 90px; position:relative}
+  .hero-inner{display:grid; grid-template-columns:1.15fr .85fr; gap:48px; align-items:center}
+  .pill{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--bg-soft); border:1px solid var(--line);
+    padding:7px 16px; border-radius:999px;
+    font-size:.8rem; font-weight:600; color:var(--ink-soft);
+    margin-bottom:24px;
+  }
+  .pill .dot{width:8px; height:8px; border-radius:50%; background:var(--ink)}
+  .hero h1{font-size:clamp(2.4rem,5.2vw,4.2rem); font-weight:600; margin-bottom:22px}
+  .hero h1 .grad{
+    background:linear-gradient(135deg,#111 0%,#555 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p{color:var(--ink-soft); font-size:1.1rem; margin-bottom:32px; max-width:48ch}
+  .actions{display:flex; gap:12px; flex-wrap:wrap}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    border:none; cursor:pointer; text-decoration:none;
+    padding:15px 28px; border-radius:999px; font-weight:600; font-size:.95rem;
+  }
+  .btn-primary{ background:var(--ink); color:#fff; }
+  .btn-ghost{ background:transparent; color:var(--ink); border:1px solid var(--line); }
+
+  /* HERO VISUAL */
+  .hero-visual{position:relative; display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:440px; justify-self:end}
+  .tile{
+    background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--radius);
+    display:grid; place-items:center; aspect-ratio:1; color:var(--ink);
+  }
+  .tile.t1{background:#fff}
+  .tile.t2{background:#fff; grid-row:span 2; aspect-ratio:auto}
+  .tile.t3{background:#fff}
+  .tile.t4{background:#fff}
+
+  /* SECTION HEADERS */
+  .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:40px; flex-wrap:wrap}
+  .section-head h2{font-size:clamp(1.9rem,3.5vw,2.6rem); font-weight:600; margin-bottom:8px}
+  .section-head p{color:var(--ink-soft); max-width:52ch}
+
+  /* FILTROS */
+  .filters{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:32px}
+  .chip{
+    border:1px solid var(--line); background:#fff; color:var(--ink-soft);
+    padding:9px 18px; border-radius:999px; cursor:pointer;
+    font-size:.86rem; font-weight:600;
+  }
+  .chip.active{background:var(--ink); color:#fff; border-color:var(--ink)}
+
+  /* CATALOGO */
+  #catalogo{padding:80px 0}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:24px}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    overflow:hidden; display:flex; flex-direction:column;
+  }
+  .thumb{
+    aspect-ratio:1; display:grid; place-items:center;
+    background:var(--bg-soft); position:relative; overflow:hidden;
+  }
+  .thumb img{width:100%; height:100%; object-fit:cover;}
+  .card-body{padding:18px 20px 22px; display:flex; flex-direction:column; gap:6px; flex:1}
+  .card .cat{font-size:.7rem; color:var(--muted); text-transform:uppercase; font-weight:700;}
+  .card h3{font-size:1.05rem; font-weight:600; margin:2px 0}
+  .price{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:1.25rem; margin-top:auto; color:var(--ink)}
+  .add{
+    margin-top:12px; border:none; cursor:pointer;
+    background:var(--ink); color:#fff;
+    padding:12px; border-radius:14px; font-weight:600; font-size:.88rem;
+  }
+  .add:disabled{background:#eee; color:#aaa; cursor:not-allowed}
+
+  /* CÓMO COMPRAR */
+  #como{padding:80px 0; background:var(--bg-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+  .steps{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:20px}
+  .step{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:26px; }
+  .step .n{
+    width:38px; height:38px; border-radius:11px;
+    background:var(--ink); color:#fff; display:grid; place-items:center;
+    font-weight:700; font-family:'Space Grotesk',sans-serif; margin-bottom:16px;
+  }
+  .step h3{font-size:1.05rem; margin-bottom:6px; font-weight:600}
+  .step p{color:var(--ink-soft); font-size:.9rem}
+
+  /* CONTACTO */
+  #contacto{padding:80px 0}
+  .contact-card{
+    background:var(--ink); color:#fff; border-radius:var(--radius-lg); padding:56px;
+    display:grid; grid-template-columns:1.2fr .8fr; gap:40px; align-items:center;
+  }
+  .contact-card h2{font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:14px;}
+  .contact-card p{color:rgba(255,255,255,.7); margin-bottom:24px;}
+  .contact-links{display:flex; flex-direction:column; gap:12px;}
+  .contact-links a{
+    display:flex; align-items:center; gap:12px;
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+    padding:14px 18px; border-radius:14px; font-weight:500; color:#fff;
+  }
+  .contact-visual{font-size:5rem; text-align:center; color:#fff}
+
+  /* FOOTER */
+  footer{padding:40px 0; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem}
+  .foot{display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center}
+
+  /* CARRITO */
+  .overlay{
+    position:fixed; inset:0; background:rgba(0,0,0,.4);
+    backdrop-filter:blur(4px); opacity:0; pointer-events:none; transition:opacity .3s; z-index:90;
+  }
+  .overlay.open{opacity:1; pointer-events:auto}
+  .drawer{
+    position:fixed; top:0; right:0; height:100%; width:min(420px,100%);
+    background:#fff; z-index:100; transform:translateX(100%);
+    transition:transform .35s; display:flex; flex-direction:column;
+  }
+  .drawer.open{transform:translateX(0)}
+  .drawer-head{padding:22px 24px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center;}
+  .drawer-head h3{font-size:1.15rem; font-weight:600}
+  .x{background:var(--bg-soft); border:none; width:34px; height:34px; border-radius:10px; cursor:pointer; font-size:1.3rem; color:var(--ink-soft); display:grid; place-items:center;}
+  .items{flex:1; overflow-y:auto; padding:20px 24px; display:flex; flex-direction:column; gap:16px}
+  .empty{color:var(--muted); text-align:center; margin-top:60px; font-size:.95rem;}
+  .empty .big{font-size:3rem; display:block; margin-bottom:12px; color:var(--ink)}
+  .item{display:flex; gap:14px; align-items:center; padding-bottom:16px; border-bottom:1px solid var(--line)}
+  .item .mini{ width:60px; height:60px; border-radius:14px; display:grid; place-items:center; background:var(--bg-soft); flex:0 0 auto; overflow:hidden;}
+  .item .mini img{width:100%; height:100%; object-fit:cover}
+  .item .info{flex:1; min-width:0}
+  .item .info strong{display:block; font-size:.92rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .item .info small{color:var(--muted); font-size:.8rem}
+  .qty{display:flex; align-items:center; gap:8px; margin-top:8px}
+  .qty button{width:26px; height:26px; border-radius:8px; border:1px solid var(--line); background:#fff; cursor:pointer; font-weight:700;}
+  .qty span{min-width:22px; text-align:center; font-size:.9rem; font-weight:700}
+  .drawer-foot{padding:22px 24px; border-top:1px solid var(--line); background:var(--bg-soft)}
+  .total{display:flex; justify-content:space-between; align-items:baseline; font-weight:700; font-size:1.15rem; margin-bottom:16px;}
+  .total span:first-child{font-weight:500; font-size:.92rem; color:var(--muted)}
+  .wa{ width:100%; border:none; cursor:pointer; background:var(--ink); color:#fff; padding:16px; border-radius:14px; font-weight:600; font-size:.98rem; display:flex; align-items:center; justify-content:center; gap:10px;}
+  .wa:disabled{background:#ddd; color:#999; cursor:not-allowed;}
+  .note{font-size:.78rem; color:var(--muted); text-align:center; margin-top:12px}
+
+  /* TOAST */
+  .toast{
+    position:fixed; bottom:24px; left:50%; transform:translate(-50%,120%);
+    background:var(--ink); color:#fff; padding:14px 24px; border-radius:14px;
+    font-size:.9rem; font-weight:600; z-index:200; transition:transform .35s;
+    box-shadow:0 20px 40px -12px rgba(0,0,0,.3);
+  }
+  .toast.show{transform:translate(-50%,0)}
+
+  @media(max-width:880px){
+    .hero-inner{grid-template-columns:1fr; gap:40px}
+    .hero-visual{justify-self:center; max-width:360px}
+    .nav-links{display:none}
+    .contact-card{grid-template-columns:1fr; padding:40px 28px; text-align:center}
+    .contact-visual{display:none}
+    .contact-links{text-align:left}
+  }
+  @media(max-width:480px){
+    .hero{padding:48px 0 56px}
+    #catalogo,#como,#contacto{padding:56px 0}
+    .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:16px}
+    .contact-card{padding:32px 22px; border-radius:24px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo">
+      <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h6v6h-6z" /><path d="M14 4h6v6h-6z" /><path d="M4 14h6v6h-6z" /><path d="M14 14h6v6h-6z" />
+      </svg>
+      Hama Studio
+    </a>
+    <nav class="nav-links">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#como">Cómo comprar</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <button class="cart-btn" id="openCart">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2l-2 5v13a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-13l-2-5z" /><path d="M4 7h16" /><path d="M16 11a4 4 0 0 1-8 0" />
+      </svg>
+      <span>Carrito</span>
+      <span class="badge" id="badge">0</span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <span class="pill"><span class="dot"></span> Hecho a mano en México</span>
+      <h1>Figuras de <span class="grad">Hama Beads</span> que se sienten vivas.</h1>
+      <p>Llaveros, personajes y sets personalizados. Cada pieza se arma pixel por pixel y se plancha a mano. Pide la tuya por WhatsApp.</p>
+      <div class="actions">
+        <a href="#catalogo" class="btn btn-primary">Ver catálogo →</a>
+        <a href="#como" class="btn btn-ghost">Cómo comprar</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="tile t1"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg></div>
+      <div class="tile t2"><svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div>
+      <div class="tile t3"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+      <div class="tile t4"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg></div>
+    </div>
+  </div>
+</section>
+
+<section id="catalogo">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Catálogo</h2>
+        <p>Todo está planchado y armado a mano. ¿No ves el personaje que quieres? Podemos hacerlo a pedido.</p>
+      </div>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section id="como">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Cómo comprar</h2>
+        <p>Sin registros, sin tarjetas. Todo se coordina directo por WhatsApp.</p>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Elige tus figuras</h3><p>Agrega al carrito lo que te guste y ajusta cantidades.</p></div>
+      <div class="step"><div class="n">2</div><h3>Envía el pedido</h3><p>El botón de WhatsApp manda tu lista con el total.</p></div>
+      <div class="step"><div class="n">3</div><h3>Confirma envío y pago</h3><p>Te decimos el costo de envío y formas de pago.</p></div>
+      <div class="step"><div class="n">4</div><h3>Recíbelo</h3><p>Empacamos con protección para que llegue perfecto.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <div class="contact-card">
+      <div>
+        <h2>¿Tienes una idea en mente?</h2>
+        <p>Pedidos personalizados, mayoreo o dudas: escríbenos.</p>
+        <div class="contact-links">
+          <a href="https://wa.me/527225645446" id="waLink">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            WhatsApp · +52 722 564 5446
+          </a>
+        </div>
+      </div>
+      <div class="contact-visual">
+        <svg class="bead" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"></circle><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div>© <span id="year"></span> Hama Studio</div>
+    <div>Envíos a todo el país</div>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3>Tu pedido</h3>
+    <button class="x" id="closeCart">✕</button>
+  </div>
+  <div class="items" id="items"></div>
+  <div class="drawer-foot">
+    <div class="total"><span>Total</span><span id="total">$0</span></div>
+    <button class="wa" id="sendWA" disabled>Enviar pedido por WhatsApp</button>
+    <p class="note">El envío se calcula al confirmar.</p>
+  </div>
+</aside>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ==========================================
+  // TUS DATOS CONFIGURADOS
+  // ==========================================
+  var CONFIG = {
+    whatsapp: "527225645446", 
+    moneda: "$",
+    nombreTienda: "Hama Studio"
+  };
+
+  // TUS PRODUCTOS CON TU FOTO
+  var PRODUCTOS = [
+    { id:"p1", nombre:"Set Completo de Figuras", categoria:"Sets", precio:350, img:"https://i.postimg.cc/k5kFSyZq/IMG-20260928-WA0009.jpg", stock:true },
+    { id:"p2", nombre:"Pikachu y Charmander", categoria:"Pokémon", precio:150, img:"https://i.postimg.cc/k5kFSyZq/IMG-20260928-WA0009.jpg", stock:true },
+    { id:"p3", nombre:"Squirtle", categoria:"Pokémon", precio:80, img:"https://i.postimg.cc/k5kFSyZq/IMG-20260928-WA0009.jpg", stock:true },
+    { id:"p4", nombre:"Gatito con moño", categoria:"Personajes", precio:100, img:"https://i.postimg.cc/k5kFSyZq/IMG-20260928-WA0009.jpg", stock:true },
+    { id:"p5", nombre:"Figuras Grandes", categoria:"Personalizado", precio:250, img:"https://i.postimg.cc/k5kFSyZq/IMG-20260928-WA0009.jpg", stock:true }
+  ];
+
+  var $ = function(s) { return document.querySelector(s); };
+  var money = function(n) { return CONFIG.moneda + n.toLocaleString("es-MX"); };
+  var carrito = JSON.parse(localStorage.getItem("hs_carrito") || "[]");
+  var guardar = function() { localStorage.setItem("hs_carrito", JSON.stringify(carrito)); };
+
+  var grid = $("#grid"), filtersEl = $("#filters");
+  var filtroActivo = "Todos";
+
+  var categorias = ["Todos"];
+  for(var i=0; i<PRODUCTOS.length; i++) {
+    if(categorias.indexOf(PRODUCTOS[i].categoria) === -1) {
+      categorias.push(PRODUCTOS[i].categoria);
+    }
+  }
+
+  filtersEl.innerHTML = categorias.map(function(c) {
+    return '<button class="chip ' + (c === "Todos" ? "active" : "") + '" data-cat="' + c + '">' + c + '</button>';
+  }).join("");
+
+  filtersEl.addEventListener("click", function(e) {
+    var b = e.target.closest(".chip");
+    if(!b) return;
+    filtroActivo = b.dataset.cat;
+    var chips = document.querySelectorAll(".chip");
+    for(var j=0; j<chips.length; j++){
+      chips[j].classList.remove("active");
+    }
+    b.classList.add("active");
+    renderCatalogo();
+  });
+
+  function renderCatalogo(){
+    var lista = PRODUCTOS.filter(function(p) { 
+      return filtroActivo === "Todos" || p.categoria === filtroActivo; 
+    });
+
+    grid.innerHTML = lista.map(function(p) {
+      var imagen = p.img ? '<img src="' + p.img + '" alt="' + p.nombre + '">' : '<span>🧩</span>';
+      return '<article class="card">' +
+        '<div class="thumb">' + imagen + '</div>' +
+        '<div class="card-body">' +
+          '<span class="cat">' + p.categoria + '</span>' +
+          '<h3>' + p.nombre + '</h3>' +
+          '<div class="price">' + money(p.precio) + '</div>' +
+          '<button class="add" data-id="' + p.id + '" ' + (p.stock ? "" : "disabled") + '>' +
+            (p.stock ? "Agregar al carrito" : "Agotado") +
+          '</button>' +
+        '</div>' +
+      '</article>';
+    }).join("");
+  }
+
+  grid.addEventListener("click", function(e) {
+    var b = e.target.closest(".add");
+    if(!b || b.disabled) return;
+    agregar(b.dataset.id);
+  });
+
+  function agregar(id){
+    var p = PRODUCTOS.find(function(x) { return x.id === id; });
+    var item = carrito.find(function(i) { return i.id === id; });
+    if(item) item.qty++;
+    else carrito.push({ id: id, qty: 1 });
+    guardar(); renderCarrito();
+    toast('✓ ' + p.nombre + ' agregado');
+  }
+
+  function cambiarQty(id, delta){
+    var item = carrito.find(function(i) { return i.id === id; });
+    if(!item) return;
+    item.qty += delta;
+    if(item.qty <= 0) carrito = carrito.filter(function(i) { return i.id !== id; });
+    guardar(); renderCarrito();
+  }
+
+  var itemsEl = $("#items"), totalEl = $("#total"), badgeEl = $("#badge"), sendBtn = $("#sendWA");
+
+  function renderCarrito(){
+    var unidades = 0;
+    for(var i=0; i<carrito.length; i++){ unidades += carrito[i].qty; }
+    
+    badgeEl.textContent = unidades;
+    badgeEl.style.display = unidades ? "grid" : "none";
+
+    if(carrito.length === 0){
+      itemsEl.innerHTML = '<p class="empty"><span class="big">🛒</span>Tu carrito está vacío.<br>Agrega una figura.</p>';
+      totalEl.textContent = money(0);
+      sendBtn.disabled = true;
+      return;
+    }
+
+    var total = 0;
+    var html = "";
+    for(var j=0; j<carrito.length; j++){
+      var item = carrito[j];
+      var p = PRODUCTOS.find(function(x) { return x.id === item.id; });
+      if(p){
+        total += p.precio * item.qty;
+        var imagen = p.img ? '<img src="' + p.img + '">' : '<span>🧩</span>';
+        html += '<div class="item">' +
+          '<div class="mini">' + imagen + '</div>' +
+          '<div class="info">' +
+            '<strong>' + p.nombre + '</strong>' +
+            '<small>' + money(p.precio) + ' c/u</small>' +
+            '<div class="qty">' +
+              '<button data-id="' + p.id + '" data-d="-1">−</button>' +
+              '<span>' + item.qty + '</span>' +
+              '<button data-id="' + p.id + '" data-d="1">+</button>' +
+            '</div>' +
+          '</div>' +
+          '<strong>' + money(p.precio * item.qty) + '</strong>' +
+        '</div>';
+      }
+    }
+    
+    itemsEl.innerHTML = html;
+    totalEl.textContent = money(total);
+    sendBtn.disabled = false;
+  }
+
+  itemsEl.addEventListener("click", function(e) {
+    var b = e.target.closest("button[data-d]");
+    if(!b) return;
+    cambiarQty(b.dataset.id, parseInt(b.dataset.d));
+  });
+
+  var overlay = $("#overlay"), drawer = $("#drawer");
+  var abrir = function() { drawer.classList.add("open"); overlay.classList.add("open"); };
+  var cerrar = function() { drawer.classList.remove("open"); overlay.classList.remove("open"); };
+  
+  $("#openCart").onclick = abrir;
+  $("#closeCart").onclick = cerrar;
+  overlay.onclick = cerrar;
+
+  sendBtn.addEventListener("click", function() {
+    if(carrito.length === 0) return;
+    var total = 0;
+    var lineas = [];
+    
+    for(var i=0; i<carrito.length; i++){
+      var item = carrito[i];
+      var p = PRODUCTOS.find(function(x) { return x.id === item.id; });
+      if(p){
+        var sub = p.precio * item.qty;
+        total += sub;
+        lineas.push('• ' + item.qty + ' x ' + p.nombre + ' — ' + money(sub));
+      }
+    }
+
+    var texto = '¡Hola ' + CONFIG.nombreTienda + '! Quiero hacer este pedido:\n\n' + lineas.join('\n') + '\n\nTotal: ' + money(total);
+    window.open('https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(texto), '_blank');
+  });
+
+  var toastTimer;
+  function toast(msg){
+    var t = $("#toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() { t.classList.remove("show"); }, 2000);
+  }
+
+  $("#year").textContent = new Date().getFullYear();
+  $("#waLink").href = 'https://wa.me/' + CONFIG.whatsapp;
+  renderCatalogo();
+  renderCarrito();
+</script>
+</body>
+</html>
